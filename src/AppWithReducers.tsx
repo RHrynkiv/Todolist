@@ -12,6 +12,8 @@ import {
 } from './state/task.reducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
+import {Menu} from "@mui/material";
+import {NavLink} from 'react-router-dom';
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodoListType = {
@@ -33,7 +35,7 @@ function App() {
     useEffect(() => {
         let thunk = fetchTodolistTC()
         dispatch(thunk)
-    },[])
+    }, [])
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
     const todolists = useSelector<AppRootStateType, Array<TodoListType>>(state => state.todolists)
     const dispatch = useDispatch();
@@ -79,17 +81,7 @@ function App() {
     }, [dispatch])
     return (
         <div className="App">
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
-                        <menu/>
-                    </IconButton>
-                    <Typography variant="h6">
-                        News
-                    </Typography>
-                    <Button color="inherit">Login</Button>
-                </Toolbar>
-            </AppBar>
+            <Header/>
             <Container>
                 <Grid container style={{padding: "20px"}}>
                     <AddItemForm addItem={AddTodolist}/>
@@ -125,4 +117,17 @@ function App() {
             </Container>
         </div>
     );
+}
+
+export const Header = () => {
+    return <AppBar position="static">
+        <Toolbar>
+            <Typography variant="h6">
+                TodoList
+            </Typography>
+            <Button color="inherit"><NavLink
+                style={{color: "white", textDecorationLine: "inherit", fontSize: "16px"}}
+                to={"/login"}>Login</NavLink></Button>
+        </Toolbar>
+    </AppBar>
 }

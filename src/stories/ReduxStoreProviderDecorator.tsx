@@ -5,6 +5,7 @@ import {taskReducer} from '../state/task.reducer'
 import {todolistsReducer} from '../state/todolists.reducer'
 import {v1} from 'uuid'
 import {AppRootStateType} from '../state/store'
+import {authReducer} from "../state/auth-reducer";
 
 const rootReducer = combineReducers({
     tasks: taskReducer,
@@ -28,7 +29,7 @@ const initialGlobalState = {
     }
 };
 
-export const storyBookStore = createStore(rootReducer, initialGlobalState as AppRootStateType);
+export const storyBookStore = createStore(rootReducer, initialGlobalState as ReturnType<typeof rootReducer>);
 
 export const ReduxStoreProviderDecorator = (storyFn: any) => (
     <Provider

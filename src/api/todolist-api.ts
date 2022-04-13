@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {LoginParamsType} from "../state/auth-reducer";
 
 type TodolistType = {
     id: string
@@ -17,7 +18,7 @@ const instance= axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
     withCredentials: true,
     headers: {
-        'API-KEY': '81cb1eba-d16e-447b-b8c3-7c17cf6feee4'
+        'API-KEY': 'e0c04a17-3bae-430a-ba6b-9e96e9991aaf'
     }
 })
 
@@ -36,6 +37,12 @@ export const todolistAPI = {
     },
     deleteTodolist(todolistId: string){
         const promise = instance.delete<ResponseType<{}>>(`todo-lists/${todolistId}`)
+        return promise
+    }
+}
+export const authAPI = {
+    login(data: LoginParamsType){
+        const promise = instance.post(`auth/login`,data)
         return promise
     }
 }
