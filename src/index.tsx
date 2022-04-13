@@ -5,13 +5,13 @@ import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux';
 import {store} from './state/store';
 import AppFirst from "./AppFirst";
-import {HashRouter} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 
 ReactDOM.render(
     <Provider store={store}>
-        <HashRouter>
+        <BrowserRouter>
             <AppFirst/>
-        </HashRouter>
+        </BrowserRouter>
     </Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
