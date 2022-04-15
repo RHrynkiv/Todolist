@@ -2,7 +2,7 @@ import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {AddItemForm} from './AddItemForm';
-import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from '@material-ui/core';
+import {AppBar, Button, Container, Grid, Paper, Toolbar, Typography} from '@material-ui/core';
 import {
     ChangeFilterTodolistAC, createTodolistTC, deleteTodolistTC, fetchTodolistTC, updateTodolistTC
 } from './state/todolists.reducer';
@@ -12,8 +12,8 @@ import {
 } from './state/task.reducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
-import {Menu} from "@mui/material";
 import {NavLink} from 'react-router-dom';
+import {FormHelperText} from "@mui/material";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodoListType = {
@@ -38,6 +38,7 @@ function App() {
     }, [])
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
     const todolists = useSelector<AppRootStateType, Array<TodoListType>>(state => state.todolists)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
     const dispatch = useDispatch();
 
     const removeTask = useCallback((id: string, todolistId: string) => {
@@ -81,40 +82,45 @@ function App() {
     }, [dispatch])
     return (
         <div className="App">
-            <Header/>
-            <Container>
-                <Grid container style={{padding: "20px"}}>
-                    <AddItemForm addItem={AddTodolist}/>
-                </Grid>
-                <Grid container spacing={3}>
-                    {
-                        todolists.map((tl) => {
-                            let allTodolistTasks = tasks[tl.id];
-                            let tasksForTodolist = allTodolistTasks;
+            <div>
+                <Header/>
+                <Container>
+                    <Grid container style={{padding: "20px"}}>
+                        <AddItemForm addItem={AddTodolist}/>
+                    </Grid>
+                    <Grid container spacing={3}>
+                        {
+                            todolists.map((tl) => {
+                                let allTodolistTasks = tasks[tl.id];
+                                let tasksForTodolist = allTodolistTasks;
 
-                            return (
-                                <Grid item key={tl.id}>
-                                    <Paper style={{padding: "10px"}}>
-                                        <Todolist id={tl.id}
-                                                  key={tl.id}
-                                                  title={tl.title}
-                                                  tasks={tasksForTodolist}
-                                                  removeTask={removeTask}
-                                                  changeFilter={changeFilter}
-                                                  addTask={addTask}
-                                                  changeTaskStatus={changeStatus}
-                                                  filter={tl.filter}
-                                                  removeTodolist={removeTodolist}
-                                                  onChangeSpan={onChangeSpan}
-                                                  onChangeTodolistTitle={onChangeTodolistTitle}
-                                        />
-                                    </Paper>
-                                </Grid>
-                            );
-                        })
-                    }
-                </Grid>
-            </Container>
+                                return (
+                                    <Grid item key={tl.id}>
+                                        <Paper style={{padding: "10px"}}>
+                                            <Todolist id={tl.id}
+                                                      key={tl.id}
+                                                      title={tl.title}
+                                                      tasks={tasksForTodolist}
+                                                      removeTask={removeTask}
+                                                      changeFilter={changeFilter}
+                                                      addTask={addTask}
+                                                      changeTaskStatus={changeStatus}
+                                                      filter={tl.filter}
+                                                      removeTodolist={removeTodolist}
+                                                      onChangeSpan={onChangeSpan}
+                                                      onChangeTodolistTitle={onChangeTodolistTitle}
+                                            />
+                                        </Paper>
+                                    </Grid>
+                                );
+                            })
+                        }
+                    </Grid>
+                </Container>
+            </div>
+            <div className={"footer"}>
+                {isLoggedIn ? null: <div className="error">Click the "Login" button</div>}
+            </div>
         </div>
     );
 }

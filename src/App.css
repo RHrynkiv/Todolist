@@ -1,0 +1,17 @@
+.footer{
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 20px;
+}
+.error{
+    opacity: 70%;
+    padding: 0 0 3px 0;
+    width: 250px;
+    display: inline-block;
+    border: 1px solid red;
+    border-radius: 10px;
+    background-color: red;
+    color: white;
+    font-size: 20px;
+}

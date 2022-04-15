@@ -3,6 +3,7 @@ import {v1} from 'uuid'
 import {TodoListType} from '../AppWithReducers'
 import {Dispatch} from "redux";
 import {todolistAPI} from "../api/todolist-api";
+import {setIsLoggedInAC} from "./auth-reducer";
 
 
 type ActionType = {
@@ -95,8 +96,9 @@ export const fetchTodolistTC = () => {
     return  (dispatch: Dispatch) => {
         todolistAPI.getTodolists()
             .then((res: any) => {
+                debugger
                 dispatch(setTodolistAC(res.data))
-
+                dispatch(setIsLoggedInAC(true))
             })
     }
 }

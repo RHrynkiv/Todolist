@@ -31,6 +31,5 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
                 dispatch(setIsLoggedInAC(true))
             }
         })
-
 }
 
