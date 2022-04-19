@@ -62,14 +62,10 @@ export const Login = () => {
                 <form onSubmit={formik.handleSubmit}>
                     <FormControl>
                         <FormLabel>
-                            <p>To log in get registered
-                                <a href={'https://social-network.samuraijs.com/'}
-                                   target={'_blank'}> here
-                                </a>
-                            </p>
-                            <p>or use common test account credentials:</p>
-                            <p>Email: free@samuraijs.com</p>
-                            <p>Password: free</p>
+                            <p>To log in</p>
+                            <p>use common account credentials:</p>
+                            <p>Email: rgrinkiv030924@gmail.com</p>
+                            <p>Password: 2417131</p>
                         </FormLabel>
                         <FormGroup>
                             <TextField label="Email" margin="normal" {...formik.getFieldProps('email')} onBlur={formik.handleBlur}/>
@@ -85,8 +81,6 @@ export const Login = () => {
                                 Login
                             </Button>
                             <div style={{textAlign: "center", opacity: "50%", padding: "5px 0 0 0"}}>Don't forget to turn on VPN</div>
-                            <div style={{textAlign: "center", opacity: "50%", padding: "5px 0 0 0"}}>email: rgrinkiv030924@gmail.com</div>
-                            <div style={{textAlign: "center", opacity: "50%", padding: "5px 0 0 0"}}>password: 241713100</div>
                         </FormGroup>
                     </FormControl>
                 </form>
